@@ -110,19 +110,11 @@ version( Solaris )
     import core.sys.posix.unistd;
 
     @property int SIGRTMIN() nothrow @nogc {
-        __gshared static int sig = -1;
-        if (sig == -1) {
-            sig = cast(int)sysconf(_SC_SIGRT_MIN);
-        }
-        return sig;
+        return cast(int)sysconf(_SC_SIGRT_MIN);
     }
 
     @property int SIGRTMAX() nothrow @nogc {
-        __gshared static int sig = -1;
-        if (sig == -1) {
-            sig = cast(int)sysconf(_SC_SIGRT_MAX);
-        }
-        return sig;
+        return cast(int)sysconf(_SC_SIGRT_MAX);
     }
 }
 else version( CRuntime_Glibc )
@@ -134,19 +126,11 @@ else version( CRuntime_Glibc )
     }
 
     @property int SIGRTMIN() nothrow @nogc {
-        __gshared static int sig = -1;
-        if (sig == -1) {
-            sig = __libc_current_sigrtmin();
-        }
-        return sig;
+        return __libc_current_sigrtmin();
     }
 
     @property int SIGRTMAX() nothrow @nogc {
-        __gshared static int sig = -1;
-        if (sig == -1) {
-            sig = __libc_current_sigrtmax();
-        }
-        return sig;
+        return __libc_current_sigrtmax();
     }
 }
 else version (FreeBSD) {
